@@ -1,0 +1,26 @@
+{
+  "name": "application/my_api",
+  "description": "my_api",
+  "type": "project",
+  "require": {
+    "php": ">=7.2"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "hewenjie",
+      "email": "332030633@qq.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "Library\\": "library/",
+      "App\\": "app/"
+    },
+    "files": [
+      "library/Functions.php"
+    ]
+  }
+}
+
