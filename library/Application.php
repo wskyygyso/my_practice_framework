@@ -2,6 +2,7 @@
 
 namespace Library;
 
+use Library\Exceptions\CommonExceptions;
 use Library\Response\Response;
 use Libray\Request\Request;
 
@@ -18,7 +19,13 @@ class Application
 
     public function handleRequest(Request $request)
     {
-        //TODO 处理请求
+        $route = $request->resolve();
+        $response = $request->runAction($route);
+        if(!($response instanceof  Response))
+        {
+            throw new CommonExceptions("返回数据不规范");
+        }
+        return $response;
     }
 
     public function run()
