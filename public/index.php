@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '..' . DIRECTORY_SEPARATOR . 'library' . DIRECTORY_SEPARATOR . 'system.php';
+require __DIR__ . '..' . DIRECTORY_SEPARATOR . 'system.php';
 //加载配置
 $config = require LIBRARY_PATH . 'Config.php';
 $debug = isset($config['debug']) ?? APP_DEBUG;
