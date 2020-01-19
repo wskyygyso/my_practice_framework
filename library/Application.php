@@ -2,9 +2,9 @@
 
 namespace Library;
 
+use Library\Components\Response;
 use Library\Exceptions\CommonExceptions;
-use Library\Response\Response;
-use Libray\Request\Request;
+use Library\Http\Request;
 
 class Application
 {
@@ -21,8 +21,7 @@ class Application
     {
         $route = $request->resolve();
         $response = $request->runAction($route);
-        if(!($response instanceof  Response))
-        {
+        if (!($response instanceof Response)) {
             throw new CommonExceptions("返回数据不规范");
         }
         return $response;

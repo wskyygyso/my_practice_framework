@@ -1,8 +1,9 @@
 <?php
 
-namespace Library\Controller;
+namespace Library\Http;
 
-use Library\Response\Response;
+
+use Library\Components\Response;
 
 class Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Library\Base;
+namespace Library\Components;
 class Base implements \ArrayAccess
 {
     private $_container;

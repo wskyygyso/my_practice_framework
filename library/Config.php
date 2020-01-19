@@ -1,4 +1,8 @@
 <?php
 return [
-    'debug' => true
+    'debug' => true,
+    'route' => [
+        '' => 'demo/welcome',
+        'test' => 'demo/welcome'
+    ]
 ];

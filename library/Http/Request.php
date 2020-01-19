@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Libray\Request;
+namespace Library\Http;
 
-use Library\Base\Base;
+use Library\Components\Base;
 
 class Request extends Base
 {
@@ -11,7 +11,7 @@ class Request extends Base
     protected $queryParams = [];
     protected $bodyParams = [];
 
-    private $controllerNameSpace = "App\\Http\\Controllers";
+    private $controllerNameSpace = "App\\Http\\Controllers\\";
     private $baseController = "Library\\Controller";
     private $pathUrl;
 
@@ -149,10 +149,11 @@ class Request extends Base
         foreach ($match as $value) {
             $controller .= ucfirst($value) . '\\';
         }
-        $controllerName = trim($controller, '\\') . 'Controller';
+        $controllerName = trim($controller, "\\");
+        $controller = trim($controller,'\\');
         if (!class_exists($controller)) {
-            //判断是否 index
-            if ($controllerName == $this->controllerNameSpace . '\\IndexController') {
+            //判断是否 index   $this->controllerNameSpace . '\\IndexController'
+            if ($controllerName == $this->controllerNameSpace . '\\Index') {
                 return new $this->baseController;
             }
             throw new \Exception("controller not found :" . $controllerName);
@@ -165,7 +166,7 @@ class Request extends Base
     {
         $route = explode('/', $route);
         //剔除空元素
-        $route = array_diff($route);
+        $route = array_filter($route);
         if (empty($route)) {
             $match = ['index'];
             $controller = $this->createController($match);

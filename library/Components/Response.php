@@ -1,8 +1,7 @@
 <?php
 
-namespace Library\Response;
+namespace Library\Components;
 
-use Library\Base\Base;
 
 class Response extends Base
 {
