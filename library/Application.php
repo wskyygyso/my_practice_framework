@@ -19,12 +19,13 @@ class Application
 
     public function handleRequest(Request $request)
     {
-        $route = $request->resolve();
+
+        $route = $request->resolve($this->config['route'] ?? []);
         $response = $request->runAction($route);
         if (!($response instanceof Response)) {
             throw new CommonExceptions("返回数据不规范");
         }
-        return $response;
+        return $response->send();
     }
 
     public function run()

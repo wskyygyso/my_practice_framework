@@ -14,6 +14,7 @@ class Request extends Base
     private $controllerNameSpace = "App\\Http\\Controllers\\";
     private $baseController = "Library\\Controller";
     private $pathUrl;
+    private $route;
 
     /**
      * 获取请求方式
@@ -150,7 +151,7 @@ class Request extends Base
             $controller .= ucfirst($value) . '\\';
         }
         $controllerName = trim($controller, "\\");
-        $controller = trim($controller,'\\');
+        $controller = trim($controller, '\\');
         if (!class_exists($controller)) {
             //判断是否 index   $this->controllerNameSpace . '\\IndexController'
             if ($controllerName == $this->controllerNameSpace . '\\Index') {
@@ -162,8 +163,19 @@ class Request extends Base
         return new $controllerName;
     }
 
+    /**
+     * 执行action
+     * @param $route
+     * @return mixed
+     * @throws \Exception
+     */
     public function runAction($route)
     {
+        //判断是否 在自定义route里
+
+        if (array_key_exists($route, $this->route)) {
+            $route = $this->route[$route];
+        }
         $route = explode('/', $route);
         //剔除空元素
         $route = array_filter($route);
@@ -188,10 +200,12 @@ class Request extends Base
 
     /**
      * 获取当前请求路径
+     * @param $route
      * @return bool|string
      */
-    public function resolve()
+    public function resolve($route)
     {
+        $this->route = $route;
         return $this->getPathUrl();
     }
 
